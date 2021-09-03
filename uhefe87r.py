@@ -13,6 +13,7 @@ img=""
 def openimg():
     global imgpath
     global img
+    imgpath= ""
     imgpath = filedialog.askopenfilename(title="Open File",
                                          filetypes=(("Image Files", "*.jpg *.tiff *.png *.jpeg"),))
     print(imgpath)
@@ -20,10 +21,19 @@ def openimg():
     imglabel['image'] = img
     print("image opened")
     
+    
+def rotatate():
+    global imgpath
+    global img
+    img = Image.open(imgpath)
+    img = img.rotate(180)
+    img = ImageTk.PhotoImage(img)
+    imglabel['image'] = img
+    
 openbtn = Button(root,font=('courier',11),text="Open Image",command=openimg)
 openbtn.place(relx=0.5,rely=0.1,anchor=CENTER)
 
-rotabtn = Button(root,font=('courier',11),text="Rotate")
-rotabtn.place(relx=0.5,rely=1.0,anchor=CENTER)
+rotabtn = Button(root,font=('courier',11),text="Rotate",command=rotatate)
+rotabtn.place(relx=0.5,rely=0.95,anchor=CENTER)
 
 root.mainloop()
